@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="registroficaDS" transaction-type="JTA">
+		<jta-data-source>java:/registroficaDS</jta-data-source>
+		<class>registrofica.model.entities.aca_carrera</class>
+		<class>registrofica.model.entities.aca_facultad</class>
+		<class>registrofica.model.entities.aca_sala</class>
+		<class>registrofica.model.entities.adm_administrador</class>
+		<class>registrofica.model.entities.reg_estado</class>
+		<class>registrofica.model.entities.reg_motivo</class>
+		<class>registrofica.model.entities.reg_persona</class>
+		<class>registrofica.model.entities.reg_registro</class>
+	</persistence-unit>
+</persistence>

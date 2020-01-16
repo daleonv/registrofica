@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Manejo de Facultades</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<h:form id="form1">
+
+			<p:autoUpdate />
+		<p:panel collapsed="#{beanFacultad.panelColapsado}">
+			<f:facet name="header">
+				<p:commandButton value="Registrar facultad" icon="fa fa-plus"
+					update="@form"
+					actionListener="#{beanFacultad.actionListenerColapsarPanel()}"></p:commandButton>
+			</f:facet>
+			<p:panelGrid columns="2">
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{beanFacultad.facultad.nombre}" required="true" />
+				<h:outputText value="Abreviatura" />
+				<p:inputText value="#{beanFacultad.facultad.abreviatura }"
+					required="true" />
+				<p:commandButton value="Insertar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanFacultad.actionListenerInsertarFacultad()}"></p:commandButton>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+	<h:form id="form2">
+		<p:panel header="Datos de facultad">
+			<p:dataTable value="#{beanFacultad.listaFacultad}" var="facultad">
+				<p:column headerText="ID Facultad">
+					<h:outputText value="#{facultad.idFacultad}"></h:outputText>
+				</p:column>
+				<p:column headerText="Nombre Facultad">
+					<h:outputText value="#{facultad.nombre}"></h:outputText>
+				</p:column>
+				<p:column headerText="Abreviatura Facultad">
+					<h:outputText value="#{facultad.abreviatura}"></h:outputText>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</body>
+</html>
