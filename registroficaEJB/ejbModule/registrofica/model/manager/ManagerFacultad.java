@@ -30,11 +30,26 @@ public class ManagerFacultad {
 		return em.createNamedQuery("aca_facultad.findAll").getResultList();
 	}
 
-	public aca_facultad findFacultadbyNombre(String nombre) {
-		return em.find(aca_facultad.class, nombre);
+	public aca_facultad findFacultadbyId(int id) {
+		return em.find(aca_facultad.class, id);
 	}
 
 	public void insertarFacultad(aca_facultad facultad) throws Exception {
 		em.persist(facultad);
 	}
+
+	public void eliminarFacultad(int id) throws Exception {
+		aca_facultad facu = findFacultadbyId(id);
+		if (facu != null)
+			em.remove(facu);
+	}
+	public void modificarFacultad(aca_facultad facultad) throws Exception {
+		aca_facultad facu = findFacultadbyId(facultad.getIdFacultad());
+		if (facu == null)
+			throw new Exception("No existe esa facultad");
+		facu.setNombre(facultad.getNombre());
+		facu.setAbreviatura(facultad.getAbreviatura());
+		em.merge(facu);
+	}
+
 }

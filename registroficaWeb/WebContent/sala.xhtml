@@ -9,7 +9,7 @@
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<title>Manejo de Facultades</title>
+		<title>Manejo de Salas</title>
 	</f:facet>
 </h:head>
 <body>
@@ -19,19 +19,15 @@
 	<div align="center">
 		<h:form id="form1">
 			<p:autoUpdate />
-			<p:panel header="Registrar una nueva facultad" style="width: 600px;">
+			<p:panel header="Registrar una nueva sala" style="width: 600px;">
 				<p:panelGrid columns="2" style="width: 400px;">
 					<h:outputText value="Nombre" />
-					<p:inputText value="#{beanFacultad.facultad.nombre}"
-						required="true" />
-					<h:outputText value="Abreviatura" />
-					<p:inputText value="#{beanFacultad.facultad.abreviatura }"
-						required="true" />
+					<p:inputText value="#{beanSala.sala.nombre}" required="true" />
 				</p:panelGrid>
 				<p:panelGrid columns="1">
 					<p:commandButton value="Insertar" icon="fa fa-save"
 						style="width: 400px;" update="@form,:form2"
-						actionListener="#{beanFacultad.actionListenerInsertarFacultad()}"></p:commandButton>
+						actionListener="#{beanSala.actionListenerInsertarSala()}"></p:commandButton>
 				</p:panelGrid>
 			</p:panel>
 		</h:form>
@@ -40,25 +36,22 @@
 	<p:separator />
 	<div align="center">
 		<h:form id="form2">
-			<p:panel header="Datos de facultad" style="width: 1800px;">
-				<p:dataTable value="#{beanFacultad.listaFacultad}" var="facultad"
-					reflow="true" rows="5" paginator="true">
-					<p:column headerText="Nombre Facultad">
-						<h:outputText value="#{facultad.nombre}"></h:outputText>
-					</p:column>
-					<p:column headerText="Abreviatura Facultad">
-						<h:outputText value="#{facultad.abreviatura}"></h:outputText>
+			<p:panel header="Datos de salas de eventos" style="width: 1800px;">
+				<p:dataTable value="#{beanSala.listaSala}" var="sala" reflow="true"
+					rows="5" paginator="true">
+					<p:column headerText="Nombre Sala">
+						<h:outputText value="#{sala.nombre}"></h:outputText>
 					</p:column>
 					<p:column headerText="OPCIONES" priority="1">
 						<div align="center">
 							<p:commandButton icon="fa fa-close" value="ELIMINAR"
 								update="@form,:form2"
-								actionListener="#{beanFacultad.actionListenerEliminarFacultad(facultad.idFacultad)}">
+								actionListener="#{beanSala.actionListenerEliminarSala(sala.idSala)}">
 								<p:confirm header="Confirmación" message="Desea eliminar?"
 									icon="fa fa-exclamation-triangle"></p:confirm>
 							</p:commandButton>
 							<p:commandButton icon="fa fa-edit" value="EDITAR"
-								actionListener="#{beanFacultad.actionListenerFacultadSeleccionada(facultad)}"
+								actionListener="#{beanSala.actionListenerSalaSeleccionada(sala)}"
 								update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
 							</p:commandButton>
 						</div>
@@ -74,22 +67,17 @@
 			</p:growl>
 			<p:panelGrid columns="2" style="width: 400px;">
 				<h:outputText value="Nombre" />
-				<p:inputText value="#{beanFacultad.facultadSeleccionada.nombre}"
-					required="true" />
-				<h:outputText value="Abreviatura" />
-				<p:inputText
-					value="#{beanFacultad.facultadSeleccionada.abreviatura }"
+				<p:inputText value="#{beanSala.salaSeleccionada.nombre}"
 					required="true" />
 			</p:panelGrid>
 			<div align="center">
 				<p:commandButton value="Actualizar" icon="fa fa-save"
-					update="@form,:form2"
-					actionListener="#{beanFacultad.actualizarFacultad()}" />
+					update="@form,:form2" actionListener="#{beanSala.actualizarSala()}" />
 			</div>
-
 		</h:form>
 	</p:dialog>
-	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+		style="width: 600px;">
 		<p:commandButton value="SI" type="button"
 			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
 		<p:commandButton value="NO" type="button"
