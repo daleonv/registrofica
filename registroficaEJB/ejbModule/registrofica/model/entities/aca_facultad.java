@@ -27,7 +27,7 @@ public class aca_facultad implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to aca_carrera
-	@OneToMany(mappedBy="acaFacultad")
+	@OneToMany(mappedBy="acaFacultad", cascade = CascadeType.REMOVE)
 	private List<aca_carrera> acaCarreras;
 
 	public aca_facultad() {

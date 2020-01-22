@@ -1,0 +1,111 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Manejo de Carreras</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<div align="center">
+		<h:form id="form1">
+			<p:autoUpdate />
+			<p:panel header="Registrar una nueva carrera" style="width: 600px;">
+				<p:panelGrid columns="2" style="width: 400px;">
+					<h:outputText value="Nombre" />
+					<p:inputText value="#{beanCarrera.carrera.nombre}" required="true" />
+					<h:outputText value="Abreviatura" />
+					<p:inputText value="#{beanCarrera.carrera.abreviatura }"
+						required="true" />
+					<h:outputText value="Facultad" />
+					<p:selectOneMenu id="facultad" value="#{beanCarrera.id_facultad}">
+						<f:selectItems value="#{beanFacultad.listaFacultad}" var="facu"
+							itemLabel="#{facu.nombre}" itemValue="#{facu.idFacultad}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:panelGrid columns="1">
+					<p:commandButton value="Insertar" icon="fa fa-save"
+						style="width: 400px;" update="@form,:form2"
+						actionListener="#{beanCarrera.actionListenerInsertarCarrera()}"></p:commandButton>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+
+	<p:separator />
+	<div align="center">
+		<h:form id="form2">
+			<p:panel header="Datos de carreras" style="width: 1800px;">
+				<p:dataTable value="#{beanCarrera.listaCarrera}" var="carrera"
+					reflow="true" rows="5" paginator="true">
+					<p:column headerText="Facultad">
+						<h:outputText value="#{carrera.acaFacultad.nombre}"></h:outputText>
+					</p:column>
+					<p:column headerText="Nombre Carrera">
+						<h:outputText value="#{carrera.nombre}"></h:outputText>
+					</p:column>
+					<p:column headerText="Abreviatura Carrera">
+						<h:outputText value="#{carrera.abreviatura}"></h:outputText>
+					</p:column>
+					<p:column headerText="OPCIONES" priority="1">
+						<div align="center">
+							<p:commandButton icon="fa fa-close" value="ELIMINAR"
+								update="@form,:form2"
+								actionListener="#{beanCarrera.actionListenerEliminarCarrera(carrera.idCarrera)}">
+								<p:confirm header="Confirmación" message="Desea eliminar?"
+									icon="fa fa-exclamation-triangle"></p:confirm>
+							</p:commandButton>
+							<p:commandButton icon="fa fa-edit" value="EDITAR"
+								actionListener="#{beanCarrera.actionListenerCarreraSeleccionado(carrera)}"
+								update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+							</p:commandButton>
+						</div>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</div>
+	<p:dialog header="Editar" widgetVar="dlgEdicion" modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<p:panelGrid columns="2" style="width: 400px;">
+				<h:outputText value="Facultad" />
+				<p:selectOneMenu id="facultad_2"
+					value="#{beanCarrera.id_facultad_seleccionada}">
+					<f:selectItems value="#{beanFacultad.listaFacultad}" var="facu"
+						itemLabel="#{facu.nombre}" itemValue="#{facu.idFacultad}" />
+				</p:selectOneMenu>
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{beanCarrera.carreraSeleccionada.nombre}"
+					required="true" />
+				<h:outputText value="Abreviatura" />
+				<p:inputText value="#{beanCarrera.carreraSeleccionada.abreviatura}"
+					required="true" />
+			</p:panelGrid>
+			<div align="center">
+				<p:commandButton value="Actualizar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanCarrera.actualizarCarrera()}" />
+			</div>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="SI" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="NO" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
+	</p:confirmDialog>
+</body>
+</html>
