@@ -7,7 +7,6 @@ import javax.inject.Named;
 
 import registrofica.model.entities.aca_carrera;
 import registrofica.model.entities.aca_facultad;
-import registrofica.model.entities.reg_estado;
 import registrofica.model.manager.ManagerCarrera;
 import registrofica.model.manager.ManagerFacultad;
 

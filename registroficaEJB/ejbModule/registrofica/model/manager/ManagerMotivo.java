@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import registrofica.model.entities.aca_facultad;
+
 import registrofica.model.entities.reg_motivo;
 
 /**

@@ -101,11 +101,21 @@
 			</div>
 		</h:form>
 	</p:dialog>
+
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 		<p:commandButton value="SI" type="button"
 			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
 		<p:commandButton value="NO" type="button"
 			styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
 	</p:confirmDialog>
+	<br/>
+	<div align="center">
+		<h:form id="form3">
+			<p:panelGrid columns="1">
+				<p:commandButton value="Volver" icon="fa fa-save"
+					action="menuAdmin" />
+			</p:panelGrid>
+		</h:form>
+	</div>
 </body>
 </html>

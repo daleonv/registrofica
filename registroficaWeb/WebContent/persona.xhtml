@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Registro de Persona</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<div align="center">
+		<h:form id="form1">
+			<p:autoUpdate />
+			<p:panel header="Registrar una nueva persona" style="width: 600px;">
+				<p:panelGrid columns="2" style="width: 400px;">
+					<h:outputText value="Cédula" />
+					<p:inputText value="#{beanPersona.persona.cedula}" required="true" />
+					<h:outputText value="Nombres" />
+					<p:inputText value="#{beanPersona.persona.nombre}" required="true" />
+					<h:outputText value="Apellidos" />
+					<p:inputText value="#{beanPersona.persona.apellido}"
+						required="true" />
+					<h:outputText value="Correo" />
+					<p:inputText value="#{beanPersona.persona.correo}" required="true" />
+					<h:outputText value="Celular" />
+					<p:inputText value="#{beanPersona.persona.celular}" required="true" />
+					<h:outputText value="Contraseña" />
+					<p:inputText value="#{beanPersona.persona.password}"
+						required="true" />
+					<h:outputText value="Carrera" />
+					<p:selectOneMenu id="carrera" value="#{beanPersona.id_carrera}">
+						<f:selectItems value="#{beanCarrera.listaCarrera}" var="carr"
+							itemLabel="#{carr.nombre}" itemValue="#{carr.idCarrera}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:panelGrid columns="1">
+					<p:commandButton value="Insertar" icon="fa fa-save"
+						style="width: 400px;" update="@form,:form2"
+						actionListener="#{beanPersona.actionListenerInsertarPersona()}"></p:commandButton>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+
+	<p:separator />
+	<div align="center">
+		<h:form id="form2">
+			<p:panel header="Datos de las Personas" style="width: 1800px;">
+				<p:dataTable value="#{beanPersona.listaPersona}" var="persona"
+					reflow="true" rows="8" paginator="true">
+					<p:column headerText="Carrera">
+						<h:outputText value="#{persona.acaCarrera.nombre}"></h:outputText>
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{persona.nombre}"></h:outputText>
+					</p:column>
+					<p:column headerText="Apellido">
+						<h:outputText value="#{persona.apellido}"></h:outputText>
+					</p:column>
+					<p:column headerText="Cedula">
+						<h:outputText value="#{persona.cedula}"></h:outputText>
+					</p:column>
+					<p:column headerText="Correo">
+						<h:outputText value="#{persona.correo}"></h:outputText>
+					</p:column>
+					<p:column headerText="Celular">
+						<h:outputText value="#{persona.celular}"></h:outputText>
+					</p:column>
+					<p:column headerText="Contraseña">
+						<h:outputText value="#{persona.password}"></h:outputText>
+					</p:column>
+					<p:column headerText="OPCIONES" priority="1">
+						<div align="center">
+							<p:commandButton icon="fa fa-close" value="ELIMINAR"
+								update="@form,:form2"
+								actionListener="#{beanPersona.actionListenerEliminarPersona(persona.cedula)}">
+								<p:confirm header="Confirmación" message="Desea eliminar?"
+									icon="fa fa-exclamation-triangle"></p:confirm>
+							</p:commandButton>
+							<p:commandButton icon="fa fa-edit" value="EDITAR"
+								actionListener="#{beanPersona.actionListenerPersonaSeleccionado(persona)}"
+								update=":formEdicion" oncomplete="PF('dlgEdicion').show();">
+							</p:commandButton>
+						</div>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</div>
+	<p:dialog header="Editar" widgetVar="dlgEdicion" modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<p:panelGrid columns="2" style="width: 400px;">
+				<h:outputText value="Carrera" />
+				<p:selectOneMenu id="carrera_2"
+					value="#{beanPersona.id_carrera_seleccionada}">
+					<f:selectItems value="#{beanCarrera.listaCarrera}" var="carr"
+						itemLabel="#{carr.nombre}" itemValue="#{carr.idCarrera}" />
+				</p:selectOneMenu>
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{beanPersona.personaSeleccionada.nombre}"
+					required="true" />
+				<h:outputText value="Apellido" />
+				<p:inputText value="#{beanPersona.personaSeleccionada.apellido}"
+					required="true" />
+				<h:outputText value="Cedula" />
+				<p:inputText value="#{beanPersona.personaSeleccionada.cedula}"
+					required="true" />
+				<h:outputText value="Correo" />
+				<p:inputText value="#{beanPersona.personaSeleccionada.correo}"
+					required="true" />
+				<h:outputText value="Celular" />
+				<p:inputText value="#{beanPersona.personaSeleccionada.celular}"
+					required="true" />
+				<h:outputText value="Contraseña" />
+				<p:inputText value="#{beanPersona.personaSeleccionada.password}"
+					required="true" />
+			</p:panelGrid>
+			<div align="center">
+				<p:commandButton value="Actualizar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanPersona.actualizarPersona()}" />
+			</div>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="SI" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="NO" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
+	</p:confirmDialog>
+	<br/>
+	<div align="center">
+		<h:form id="form3">
+			<p:panelGrid columns="1">
+				<p:commandButton value="Volver" icon="fa fa-save"
+					action="menuAdmin.xhtml" />
+			</p:panelGrid>
+		</h:form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Manejo de Registros</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<div align="left">
+		<h:form id="form1">
+			<p:autoUpdate />
+			<p:panel header="Realizar un registro" style="width: 600px;">
+				<p:panelGrid columns="2" style="width: 400px;">
+					<h:outputText value="Cedula" />
+					<p:selectOneMenu id="cedula" value="#{beanRegistro.cedula}">
+						<f:selectItems value="#{beanPersona.listaPersona}" var="ced"
+							itemLabel="#{ced.cedula}" itemValue="#{ced.cedula}" />
+					</p:selectOneMenu>
+
+
+					<h:outputText value="Sala" />
+					<p:selectOneMenu id="sala" value="#{beanRegistro.id_sala}">
+						<f:selectItems value="#{beanSala.listaSala}" var="sal"
+							itemLabel="#{sal.nombre}" itemValue="#{sal.idSala}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Motivo" />
+					<p:selectOneMenu id="motivo" value="#{beanRegistro.id_motivo}">
+						<f:selectItems value="#{beanMotivo.listaMotivo}" var="mot"
+							itemLabel="#{mot.detalle}" itemValue="#{mot.idMotivo}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Estado" />
+					<p:selectOneMenu id="estado" value="#{beanRegistro.id_estado}">
+						<f:selectItems value="#{beanEstado.listaEstado}" var="est"
+							itemLabel="#{est.nombre}" itemValue="#{est.idEstado}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Fecha de inicio" />
+					<p:calendar value="#{beanRegistro.inicio}"
+						pattern="yyyy-MM-dd HH:mm:ss" mindate="#{beanRegistro.todayDate}"></p:calendar>
+					<h:outputText value="Fecha de finalización" />
+					<p:calendar value="#{beanRegistro.fin}"
+						pattern="yyyy-MM-dd HH:mm:ss" mindate="#{beanRegistro.todayDate}"></p:calendar>
+
+					<h:outputText value="Descripción" />
+					<p:textEditor value="#{beanRegistro.descripcion}"></p:textEditor>
+
+				</p:panelGrid>
+				<p:panelGrid columns="1">
+					<p:commandButton value="Insertar" icon="fa fa-save"
+						style="width: 400px;" update="@form,:form2"
+						actionListener="#{beanRegistro.actionListenerInsertarRegistro()}">
+						<p:confirm header="Confirmación"
+							message="Asegurese que los datos ingresados estén correctos. ¿Confirma el registro?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="SI" type="button"
+				styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+			<p:commandButton value="NO" type="button"
+				styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
+		</p:confirmDialog>
+	</div>
+	<div align="right">
+			<h:form id="form2">
+			
+<script>
+        PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D','L','M','M','J','V','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+        };
+       
+        </script>
+			<p:schedule id="schedule" value="#{beanRegistro.modelo}"
+				style="width: 1200px;" locale="es" timeZone="America/Bogota" draggable="false"></p:schedule>
+		</h:form>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Menú de Administrador</title>
+	</f:facet>
+</h:head>
+<body>
+
+	<div align="center">
+		<h:form>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Registrar Motivo" icon="fa fa-save"
+					style="width: 400px;" action="motivo.xhtml"></p:commandButton>
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Registrar Carrera" icon="fa fa-save"
+					style="width: 400px;" action="carrera.xhtml"></p:commandButton>
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Registrar Estado" icon="fa fa-save"
+					style="width: 400px;" action="estado.xhtml"></p:commandButton>
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Registrar Facultad" icon="fa fa-save"
+					style="width: 400px;" action="facultad.xhtml"></p:commandButton>
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Registrar Persona" icon="fa fa-save"
+					style="width: 400px;" action="persona.xhtml"></p:commandButton>
+			</p:panelGrid>
+			<p:panelGrid columns="1">
+				<p:commandButton value="Registrar Sala" icon="fa fa-save"
+					style="width: 400px;" action="sala.xhtml"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+	</div>
+
+</body>
+</html>
