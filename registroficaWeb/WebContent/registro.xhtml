@@ -13,72 +13,68 @@
 	</f:facet>
 </h:head>
 <body>
-	<p:growl>
-		<p:autoUpdate />
-	</p:growl>
-	<div align="left">
-		<h:form id="form1">
-			<p:autoUpdate />
-			<p:panel header="Realizar un registro" style="width: 600px;">
-				<p:panelGrid columns="2" style="width: 400px;">
-					<h:outputText value="Cedula" />
-					<p:selectOneMenu id="cedula" value="#{beanRegistro.cedula}">
-						<f:selectItems value="#{beanPersona.listaPersona}" var="ced"
-							itemLabel="#{ced.cedula}" itemValue="#{ced.cedula}" />
-					</p:selectOneMenu>
+	<div class="ui-g">
+		<div class="ui-g-12 ui-md-6 ui-lg-4">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:form id="form1">
+				<p:autoUpdate />
+				<p:panel header="Realizar un registro">
+					<p:panelGrid columns="2"
+						columnClasses="ui-g-12 ui-md-4,ui-g-12 ui-md-8" layout="grid"
+						styleClass="ui-panelgrid-blank ui-fluid">
+						<h:outputText value="Cedula" />
+						<p:selectOneMenu id="cedula" value="#{beanRegistro.cedula}">
+							<f:selectItems value="#{beanPersona.listaPersona}" var="ced"
+								itemLabel="#{ced.cedula}" itemValue="#{ced.cedula}" />
+						</p:selectOneMenu>
 
+						<h:outputText value="Sala" />
+						<p:selectOneMenu id="sala" value="#{beanRegistro.id_sala}">
+							<f:selectItems value="#{beanSala.listaSala}" var="sal"
+								itemLabel="#{sal.nombre}" itemValue="#{sal.idSala}" />
+						</p:selectOneMenu>
 
-					<h:outputText value="Sala" />
-					<p:selectOneMenu id="sala" value="#{beanRegistro.id_sala}">
-						<f:selectItems value="#{beanSala.listaSala}" var="sal"
-							itemLabel="#{sal.nombre}" itemValue="#{sal.idSala}" />
-					</p:selectOneMenu>
+						<h:outputText value="Motivo" />
+						<p:selectOneMenu id="motivo" value="#{beanRegistro.id_motivo}">
+							<f:selectItems value="#{beanMotivo.listaMotivo}" var="mot"
+								itemLabel="#{mot.detalle}" itemValue="#{mot.idMotivo}" />
+						</p:selectOneMenu>
 
-					<h:outputText value="Motivo" />
-					<p:selectOneMenu id="motivo" value="#{beanRegistro.id_motivo}">
-						<f:selectItems value="#{beanMotivo.listaMotivo}" var="mot"
-							itemLabel="#{mot.detalle}" itemValue="#{mot.idMotivo}" />
-					</p:selectOneMenu>
+						<h:outputText value="Fecha de inicio" />
+						<p:calendar value="#{beanRegistro.inicio}"
+							pattern="yyyy-MM-dd HH:mm" mindate="#{beanRegistro.todayDate}"></p:calendar>
+						<h:outputText value="Fecha de finalización" />
+						<p:calendar value="#{beanRegistro.fin}"
+							pattern="yyyy-MM-dd HH:mm" mindate="#{beanRegistro.todayDate}"></p:calendar>
+						<h:outputText value="Desc.ripción" />
+						<p:textEditor value="#{beanRegistro.descripcion}"></p:textEditor>
 
-					<h:outputText value="Estado" />
-					<p:selectOneMenu id="estado" value="#{beanRegistro.id_estado}">
-						<f:selectItems value="#{beanEstado.listaEstado}" var="est"
-							itemLabel="#{est.nombre}" itemValue="#{est.idEstado}" />
-					</p:selectOneMenu>
-
-					<h:outputText value="Fecha de inicio" />
-					<p:calendar value="#{beanRegistro.inicio}"
-						pattern="yyyy-MM-dd HH:mm:ss" mindate="#{beanRegistro.todayDate}"></p:calendar>
-					<h:outputText value="Fecha de finalización" />
-					<p:calendar value="#{beanRegistro.fin}"
-						pattern="yyyy-MM-dd HH:mm:ss" mindate="#{beanRegistro.todayDate}"></p:calendar>
-
-					<h:outputText value="Descripción" />
-					<p:textEditor value="#{beanRegistro.descripcion}"></p:textEditor>
-
-				</p:panelGrid>
-				<p:panelGrid columns="1">
-					<p:commandButton value="Insertar" icon="fa fa-save"
-						style="width: 400px;" update="@form,:form2"
-						actionListener="#{beanRegistro.actionListenerInsertarRegistro()}">
-						<p:confirm header="Confirmación"
-							message="Asegurese que los datos ingresados estén correctos. ¿Confirma el registro?"
-							icon="fa fa-exclamation-triangle"></p:confirm>
-					</p:commandButton>
-				</p:panelGrid>
-			</p:panel>
-		</h:form>
-		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-			<p:commandButton value="SI" type="button"
-				styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
-			<p:commandButton value="NO" type="button"
-				styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
-		</p:confirmDialog>
-	</div>
-	<div align="right">
+					</p:panelGrid>
+					<p:panelGrid columns="1" columnClasses="ui-g-12 ui-md-12"
+						layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+						<p:commandButton value="Insertar" icon="fa fa-save"
+							update="@form,:form2"
+							actionListener="#{beanRegistro.actionListenerInsertarRegistro()}">
+							<p:confirm header="Confirmación"
+								message="Asegurese que los datos ingresados estén correctos. ¿Confirma el registro?"
+								icon="fa fa-exclamation-triangle"></p:confirm>
+						</p:commandButton>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="SI" type="button"
+					styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+				<p:commandButton value="NO" type="button"
+					styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
+			</p:confirmDialog>
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-8">
 			<h:form id="form2">
-			
-<script>
+
+				<script>
         PrimeFaces.locales['es'] = {
                 closeText: 'Cerrar',
                 prevText: 'Anterior',
@@ -107,10 +103,12 @@
         };
        
         </script>
-			<p:schedule id="schedule" value="#{beanRegistro.modelo}"
-				style="width: 1200px;" locale="es" timeZone="America/Bogota" draggable="false"></p:schedule>
-		</h:form>
+				<p:schedule id="schedule" value="#{beanRegistro.modelo}"
+					style="width: 1200px;" locale="es" timeZone="America/Bogota"
+					draggable="false" resizable="false"></p:schedule>
+			</h:form>
 
+		</div>
 	</div>
 </body>
 </html>

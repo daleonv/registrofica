@@ -23,10 +23,14 @@
 				<p:panelGrid columns="2" style="width: 400px;">
 					<h:outputText value="Nombre" />
 					<p:inputText value="#{beanFacultad.facultad.nombre}"
-						required="true" />
+						required="true" validatorMessage="Ingrese solo letras en Nombre">
+						<f:validateRegex pattern="[a-zA-Z]+"/>
+					</p:inputText>
 					<h:outputText value="Abreviatura" />
-					<p:inputText value="#{beanFacultad.facultad.abreviatura }"
-						required="true" />
+					<p:inputText value="#{beanFacultad.facultad.abreviatura}"
+						required="true" validatorMessage="Ingrese solo letras mayúsculas en Abreviatura">
+						<f:validateRegex pattern="[A-Z]+"/>
+					</p:inputText>
 				</p:panelGrid>
 				<p:panelGrid columns="1">
 					<p:commandButton value="Insertar" icon="fa fa-save"
@@ -95,7 +99,7 @@
 		<p:commandButton value="NO" type="button"
 			styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
 	</p:confirmDialog>
-	<br/>
+	<br />
 	<div align="center">
 		<h:form id="form3">
 			<p:panelGrid columns="1">

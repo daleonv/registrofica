@@ -22,7 +22,9 @@
 			<p:panel header="Registrar un nuevo motivo" style="width: 600px;">
 				<p:panelGrid columns="2" style="width: 400px;">
 					<h:outputText value="Nombre/Detalle del motivo" />
-					<p:inputText value="#{beanMotivo.motivo.detalle}" required="true" />
+					<p:inputText value="#{beanMotivo.motivo.detalle}" required="true" validatorMessage="Ingrese solo letras en el motivo">
+					<f:validateRegex pattern="[a-zA-Z]+"/>
+					</p:inputText>
 				</p:panelGrid>
 				<p:panelGrid columns="1">
 					<p:commandButton value="Insertar" icon="fa fa-save"
@@ -39,7 +41,7 @@
 			<p:panel header="Información de motivos" style="width: 1800px;">
 				<p:dataTable value="#{beanMotivo.listaMotivo}" var="motivo"
 					reflow="true" rows="5" paginator="true">
-					<p:column headerText="ID Facultad">
+					<p:column headerText="ID Motivo">
 						<h:outputText value="#{motivo.idMotivo}"></h:outputText>
 					</p:column>
 					<p:column headerText="Detalle">

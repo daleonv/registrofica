@@ -83,7 +83,7 @@ public class BeanRegistro implements Serializable {
 
 	public void actionListenerInsertarRegistro() {
 		try {
-			managerRegistro.insertarRegistro(cedula, id_sala, id_motivo, id_estado, inicio, fin, descripcion);
+			managerRegistro.insertarRegistro(cedula, id_sala, id_motivo, 1, inicio, fin, descripcion);
 			listaRegistro = managerRegistro.findAllRegistro();
 			modelo.clear();
 			for (reg_registro reg: listaRegistro) {
