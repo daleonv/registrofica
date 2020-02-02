@@ -22,8 +22,9 @@
 			<p:panel header="Registrar una nueva sala" style="width: 600px;">
 				<p:panelGrid columns="2" style="width: 400px;">
 					<h:outputText value="Nombre" />
-					<p:inputText value="#{beanSala.sala.nombre}" required="true" validatorMessage="Ingrese solo letras en Nombre">
-					<f:validateRegex pattern="[a-zA-Z]+"/>
+					<p:inputText value="#{beanSala.sala.nombre}" required="true"
+						validatorMessage="Ingrese solo letras en Nombre">
+						<f:validateRegex pattern="[a-zA-Z]+" />
 					</p:inputText>
 				</p:panelGrid>
 				<p:panelGrid columns="1">
@@ -70,7 +71,9 @@
 			<p:panelGrid columns="2" style="width: 400px;">
 				<h:outputText value="Nombre" />
 				<p:inputText value="#{beanSala.salaSeleccionada.nombre}"
-					required="true" />
+					required="true" validatorMessage="Ingrese solo letras en Nombre">
+					<f:validateRegex pattern="[a-zA-Z]+" />
+				</p:inputText>
 			</p:panelGrid>
 			<div align="center">
 				<p:commandButton value="Actualizar" icon="fa fa-save"
