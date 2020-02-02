@@ -24,12 +24,13 @@
 					<h:outputText value="Nombre" />
 					<p:inputText value="#{beanFacultad.facultad.nombre}"
 						required="true" validatorMessage="Ingrese solo letras en Nombre">
-						<f:validateRegex pattern="[a-zA-Z]+"/>
+						<f:validateRegex pattern="[a-zA-Z]+" />
 					</p:inputText>
 					<h:outputText value="Abreviatura" />
 					<p:inputText value="#{beanFacultad.facultad.abreviatura}"
-						required="true" validatorMessage="Ingrese solo letras mayúsculas en Abreviatura">
-						<f:validateRegex pattern="[A-Z]+"/>
+						required="true"
+						validatorMessage="Ingrese solo letras mayúsculas en Abreviatura">
+						<f:validateRegex pattern="[A-Z]+" />
 					</p:inputText>
 				</p:panelGrid>
 				<p:panelGrid columns="1">
@@ -79,11 +80,16 @@
 			<p:panelGrid columns="2" style="width: 400px;">
 				<h:outputText value="Nombre" />
 				<p:inputText value="#{beanFacultad.facultadSeleccionada.nombre}"
-					required="true" />
+					required="true" validatorMessage="Ingrese solo letras en Nombre">
+					<f:validateRegex pattern="[a-zA-Z]+" />
+				</p:inputText>
 				<h:outputText value="Abreviatura" />
 				<p:inputText
 					value="#{beanFacultad.facultadSeleccionada.abreviatura }"
-					required="true" />
+					required="true"
+					validatorMessage="Ingrese solo letras mayúsculas en Abreviatura">
+					<f:validateRegex pattern="[A-Z]+" />
+				</p:inputText>
 			</p:panelGrid>
 			<div align="center">
 				<p:commandButton value="Actualizar" icon="fa fa-save"

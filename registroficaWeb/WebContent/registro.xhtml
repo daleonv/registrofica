@@ -13,6 +13,13 @@
 	</f:facet>
 </h:head>
 <body>
+	<div align="center">
+		<br /> <br />
+		<h1>Bievenido</h1> 
+		<h2>REALICE SU REGISTRO</h2>
+		<br />
+		<br /> <br /> <br />
+	</div>
 	<div class="ui-g">
 		<div class="ui-g-12 ui-md-6 ui-lg-4">
 			<p:growl>
@@ -56,7 +63,8 @@
 						layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
 						<p:commandButton value="Insertar" icon="fa fa-save"
 							update="@form,:form2"
-							actionListener="#{beanRegistro.actionListenerInsertarRegistro()}" action="confirmacion.html">
+							actionListener="#{beanRegistro.actionListenerInsertarRegistro()}"
+							action="confirmacion.html">
 							<p:confirm header="Confirmación"
 								message="Asegurese que los datos ingresados estén correctos. ¿Confirma el registro?"
 								icon="fa fa-exclamation-triangle"></p:confirm>
@@ -112,8 +120,9 @@
 						oncomplete="PF('eventDialog').show();" />
 				</p:schedule>
 
-				<p:dialog widgetVar="eventDialog" header="Información de la reservación"
-					showEffect="clip" hideEffect="clip">
+				<p:dialog widgetVar="eventDialog"
+					header="Información de la reservación" showEffect="clip"
+					hideEffect="clip">
 					<h:panelGrid id="eventDetails" columns="2">
 						<p:outputLabel for="title" value="Evento:" />
 						<p:inputText id="title" value="#{beanRegistro.event.title}"
@@ -134,9 +143,9 @@
 
 					</h:panelGrid>
 					<div align="center">
-					<p:commandButton id="addButton" value="Regresar"
-							oncomplete="PF('eventDialog').hide();"/>
-							</div>
+						<p:commandButton id="addButton" value="Regresar"
+							oncomplete="PF('eventDialog').hide();" />
+					</div>
 				</p:dialog>
 			</h:form>
 

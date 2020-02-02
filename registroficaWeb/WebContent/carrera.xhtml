@@ -29,7 +29,8 @@
 					</p:inputText>
 					<h:outputText value="Abreviatura" />
 					<p:inputText value="#{beanCarrera.carrera.abreviatura }"
-						required="true" validatorMessage="Ingrese solo letras mayusculas en Abreviatura">
+						required="true"
+						validatorMessage="Ingrese solo letras mayusculas en Abreviatura">
 						<f:validateRegex pattern="[A-Z]+" />
 					</p:inputText>
 					<h:outputText value="Facultad" />
@@ -94,10 +95,15 @@
 				</p:selectOneMenu>
 				<h:outputText value="Nombre" />
 				<p:inputText value="#{beanCarrera.carreraSeleccionada.nombre}"
-					required="true" />
+					required="true" validatorMessage="Ingrese solo letras en Nombre">
+					<f:validateRegex pattern="[a-zA-Z]+" />
+				</p:inputText>
 				<h:outputText value="Abreviatura" />
 				<p:inputText value="#{beanCarrera.carreraSeleccionada.abreviatura}"
-					required="true" />
+					required="true"
+					validatorMessage="Ingrese solo letras mayusculas en Abreviatura">
+					<f:validateRegex pattern="[A-Z]+" />
+				</p:inputText>
 			</p:panelGrid>
 			<div align="center">
 				<p:commandButton value="Actualizar" icon="fa fa-save"

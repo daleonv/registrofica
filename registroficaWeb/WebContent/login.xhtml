@@ -11,26 +11,37 @@
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
 		<title>Iniciar Sesión</title>
+
 	</f:facet>
 </h:head>
 <body>
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
-	<h:form>
-		<h:panelGrid columns="2">
-			<p:outputLabel for="txtCedula" value="Cedula" />
-			<p:inputText id="txtCedula" value="#{beanPersona.persona.cedula}"
-				required="true" validatorMessage="Se debe ingresar únicamente numeros en la Cédula">
-				<f:validateRegex pattern="[0-9]+" />
-			</p:inputText>
-			<p:outputLabel for="txtPassword" value="Password" />
-			<p:inputText id="txtPassword" value="#{beanPersona.persona.password}"
-				required="true" />
-			<h:column />
-			<p:commandButton icon="ui-icon-key" value="Iniciar Sesión"
-				action="#{beanPersona.iniciarSesion()}" />
-		</h:panelGrid>
-	</h:form>
+	<div align="center">
+		<br /> <br />
+		<h1>UNIVERSIDAD TÉCNICA DEL NORTE</h1>
+		<br />
+		<div align="center">
+			<img src="resources/img/logos/utn.png" alt="" />
+		</div>
+		<br /> <br /> <br />
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel for="txtCedula" value="Cedula" />
+				<p:inputText id="txtCedula" value="#{beanPersona.persona.cedula}"
+					required="true"
+					validatorMessage="Se debe ingresar únicamente numeros en la Cédula">
+					<f:validateRegex pattern="[0-9]+" />
+				</p:inputText>
+				<p:outputLabel for="txtPassword" value="Password" />
+				<p:inputText type="password" id="txtPassword"
+					value="#{beanPersona.persona.password}" required="true" />
+				<h:column />
+				<p:commandButton icon="ui-icon-key" value="Iniciar Sesión"
+					action="#{beanPersona.iniciarSesion()}" />
+			</h:panelGrid>
+		</h:form>
+	</div>
 </body>
 </html>

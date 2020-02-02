@@ -22,16 +22,27 @@
 			<p:panel header="Registrar una nueva persona" style="width: 600px;">
 				<p:panelGrid columns="2" style="width: 400px;">
 					<h:outputText value="Cédula" />
-					<p:inputText value="#{beanPersona.persona.cedula}" required="true" />
+					<p:inputText value="#{beanPersona.persona.cedula}" required="true"
+						validatorMessage="Ingrese solo números en Cédula">
+						<f:validateRegex pattern="[0-9]+" />
+					</p:inputText>
 					<h:outputText value="Nombres" />
-					<p:inputText value="#{beanPersona.persona.nombre}" required="true" />
+					<p:inputText value="#{beanPersona.persona.nombre}" required="true"
+						validatorMessage="Ingrese solo letras en Nombre">
+						<f:validateRegex pattern="[a-zA-Z]+" />
+					</p:inputText>
 					<h:outputText value="Apellidos" />
 					<p:inputText value="#{beanPersona.persona.apellido}"
-						required="true" />
+						required="true" validatorMessage="Ingrese solo letras en Apellido">
+						<f:validateRegex pattern="[a-zA-Z]+" />
+					</p:inputText>
 					<h:outputText value="Correo" />
 					<p:inputText value="#{beanPersona.persona.correo}" required="true" />
 					<h:outputText value="Celular" />
-					<p:inputText value="#{beanPersona.persona.celular}" required="true" />
+					<p:inputText value="#{beanPersona.persona.celular}" required="true"
+						validatorMessage="Ingrese solo números en celular">
+						<f:validateRegex pattern="[0-9]+" />
+					</p:inputText>
 					<h:outputText value="Contraseña" />
 					<p:inputText value="#{beanPersona.persona.password}"
 						required="true" />
@@ -109,19 +120,27 @@
 				</p:selectOneMenu>
 				<h:outputText value="Nombre" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.nombre}"
-					required="true" />
+					required="true" validatorMessage="Ingrese solo letras en Nombre">
+					<f:validateRegex pattern="[a-zA-Z]+" />
+				</p:inputText>
 				<h:outputText value="Apellido" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.apellido}"
-					required="true" />
+					required="true" validatorMessage="Ingrese solo letras en Apellido">
+					<f:validateRegex pattern="[a-zA-Z]+" />
+				</p:inputText>
 				<h:outputText value="Cedula" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.cedula}"
-					required="true" />
+					required="true" validatorMessage="Ingrese solo letras en Cédula">
+					<f:validateRegex pattern="[0-9]+" />
+				</p:inputText>
 				<h:outputText value="Correo" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.correo}"
 					required="true" />
 				<h:outputText value="Celular" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.celular}"
-					required="true" />
+					required="true" validatorMessage="Ingrese solo números en Celular">
+					<f:validateRegex pattern="[0-9]+" />
+				</p:inputText>
 				<h:outputText value="Contraseña" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.password}"
 					required="true" />
@@ -139,7 +158,7 @@
 		<p:commandButton value="NO" type="button"
 			styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
 	</p:confirmDialog>
-	<br/>
+	<br />
 	<div align="center">
 		<h:form id="form3">
 			<p:panelGrid columns="1">

@@ -18,17 +18,29 @@
 		<p:autoUpdate />
 	</p:growl>
 	<h:form>
-		<h:panelGrid columns="2">
-			<p:outputLabel for="txtUsuario" value="Username" />
-			<p:inputText id="txtUsuario" value="#{beanAdministrador.administrador.username}"
-				required="true" />
-			<p:outputLabel for="txtPassword" value="Password" />
-			<p:inputText id="txtPassword" value="#{beanAdministrador.administrador.password}"
-				required="true" />
-			<h:column />
-			<p:commandButton icon="ui-icon-key" value="Iniciar Sesión"
-				action="#{beanAdministrador.iniciarSesion()}" />
-		</h:panelGrid>
+		<div align="center">
+			<br /> <br />
+			<h1>ADMINISTRADOR</h1>
+			<h1>UNIVERSIDAD TÉCNICA DEL NORTE</h1>
+			<br />
+			<div align="center">
+				<img src="resources/img/logos/utn.png" alt="" />
+			</div>
+			<br /> <br /> <br />
+
+			<h:panelGrid columns="2">
+				<p:outputLabel for="txtUsuario" value="Username" />
+				<p:inputText id="txtUsuario"
+					value="#{beanAdministrador.administrador.username}" required="true" />
+				<p:outputLabel for="txtPassword" value="Password" />
+				<p:inputText id="txtPassword" type="password"
+					value="#{beanAdministrador.administrador.password}" required="true" />
+				<h:column />
+				<p:commandButton icon="ui-icon-key" value="Iniciar Sesión"
+					action="#{beanAdministrador.iniciarSesion()}" />
+			</h:panelGrid>
+		</div>
 	</h:form>
+
 </body>
 </html>
