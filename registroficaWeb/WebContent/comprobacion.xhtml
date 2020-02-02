@@ -9,11 +9,11 @@
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<title>Registro de Persona</title>
+		<title>Solicitudes</title>
 	</f:facet>
 </h:head>
 <body>
-	estas en confirmacion
+	<h1 align="center">SOLICITUDES</h1>
 	<div align="center">
 		<h:form id="form2">
 			<p:panel header="Solicitudes Pendientes" style="width: 1800px;">
@@ -49,17 +49,15 @@
 					<p:column headerText="OPCIONES" priority="1">
 						<div align="center">
 							<p:commandButton icon="fa fa-save" value="Aceptar"
-								update="@form,:form2">
-								<p:confirm header="Confirmación" message="Confirmar Solicitud?"
-									icon="fa fa-check"
-									actionListener="#{beanRegistro.actionListenerRegistroSeleccionado(registro)}"
-									update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:confirm>
+								update="@form,:form2"
+								actionListener="#{beanRegistro.confirmarSolicitud()}">
+								
 							</p:commandButton>
 							<p:commandButton icon="fa fa-close" value="Rechazar"
 								update=":@form,:form2" header="Rechazar"
 								message="Rechazar solicitud">
 								<p:confirm header="Rechazar" message="Rechazar Solicitud?"
-									icon="fa fa-exclamation-triangle"></p:confirm>
+									icon="fa fa-exclamation-triangle" ></p:confirm>
 							</p:commandButton>
 						</div>
 					</p:column>
@@ -67,24 +65,15 @@
 			</p:panel>
 		</h:form>
 	</div>
-	<p:dialog header="Aceptar" widgetVar="dlgEdicion" modal="true">
-		<h:form id="formEdicion">
-			<p:growl>
-				<p:autoUpdate />
-			</p:growl>
-			<div align="center">
-				<p:commandButton value="Actualizar" icon="fa fa-save"
-					update="@form,:form2"
-					actionListener="#{beanRegistro.confirmarSolicitud()}" />
-			</div>
-		</h:form>
-	</p:dialog>
+	<h:form id="form4">
 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 		<p:commandButton value="SI" type="button"
-			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"
+			actionListener="#{beanRegistro.confirmarSolicitud()}"></p:commandButton>
 		<p:commandButton value="NO" type="button"
 			styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
 	</p:confirmDialog>
+	</h:form>
 	<br />
 	<div align="center">
 		<h:form id="form3">
