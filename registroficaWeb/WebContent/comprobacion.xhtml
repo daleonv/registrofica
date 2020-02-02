@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Registro de Persona</title>
+	</f:facet>
+</h:head>
+<body>
+	estas en confirmacion
+	<div align="center">
+		<h:form id="form2">
+			<p:panel header="Solicitudes Pendientes" style="width: 1800px;">
+				<p:dataTable value="#{beanRegistro.listaRegistro}" var="registro"
+					reflow="true" rows="8" paginator="true">
+					<p:column headerText="Cedula">
+						<h:outputText value="#{registro.regPersona.cedula}"></h:outputText>
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{registro.regPersona.nombre}"></h:outputText>
+					</p:column>
+					<p:column headerText="Apellido">
+						<h:outputText value="#{registro.regPersona.apellido}"></h:outputText>
+					</p:column>
+					<p:column headerText="Sala">
+						<h:outputText value="#{registro.acaSala.nombre}"></h:outputText>
+					</p:column>
+					<p:column headerText="Motivo">
+						<h:outputText value="#{registro.regMotivo.detalle}"></h:outputText>
+					</p:column>
+					<p:column headerText="Fecha de inicio">
+						<h:outputText value="#{registro.inicio}"></h:outputText>
+					</p:column>
+					<p:column headerText="Fecha de finalización">
+						<h:outputText value="#{registro.fin}"></h:outputText>
+					</p:column>
+					<p:column headerText="Descripción">
+						<h:outputText value="#{registro.descripcion}"></h:outputText>
+					</p:column>
+					<p:column headerText="Estado">
+						<h:outputText value="#{registro.regEstado.nombre}"></h:outputText>
+					</p:column>
+					<p:column headerText="OPCIONES" priority="1">
+						<div align="center">
+							<p:commandButton icon="fa fa-save" value="Aceptar"
+								update="@form,:form2">
+								<p:confirm header="Confirmación" message="Confirmar Solicitud?"
+									icon="fa fa-check"
+									actionListener="#{beanRegistro.actionListenerRegistroSeleccionado(registro)}"
+									update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:confirm>
+							</p:commandButton>
+							<p:commandButton icon="fa fa-close" value="Rechazar"
+								update=":@form,:form2" header="Rechazar"
+								message="Rechazar solicitud">
+								<p:confirm header="Rechazar" message="Rechazar Solicitud?"
+									icon="fa fa-exclamation-triangle"></p:confirm>
+							</p:commandButton>
+						</div>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</div>
+	<p:dialog header="Aceptar" widgetVar="dlgEdicion" modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<div align="center">
+				<p:commandButton value="Actualizar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{beanRegistro.confirmarSolicitud()}" />
+			</div>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="SI" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="NO" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
+	</p:confirmDialog>
+	<br />
+	<div align="center">
+		<h:form id="form3">
+			<p:panelGrid columns="1">
+				<p:commandButton value="Volver" icon="fa fa-save"
+					action="menuAdmin.xhtml" />
+			</p:panelGrid>
+		</h:form>
+	</div>
+</body>
+</html>

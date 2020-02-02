@@ -33,6 +33,8 @@ public class ManagerRegistro {
 	private ManagerMotivo managerMotivo;
 	@EJB
 	private ManagerEstado managerEstado;
+	@EJB
+	private ManagerRegistro managerRegistro;
 
 	/**
 	 * Default constructor.
@@ -49,8 +51,12 @@ public class ManagerRegistro {
 		return em.find(reg_registro.class, id);
 	}
 
-	public void insertarRegistro(String cedula, int codigoSala, int codigoMotivo,
-			int codigoEstado, Date inicio, Date fin, String descripcion) throws Exception {
+	public reg_estado findEstadobyId(int id_estado) {
+		return em.find(reg_estado.class, id_estado);
+	}
+
+	public void insertarRegistro(String cedula, int codigoSala, int codigoMotivo, int codigoEstado, Date inicio,
+			Date fin, String descripcion) throws Exception {
 		reg_registro registro = new reg_registro();
 		reg_persona persona;
 		aca_sala sala;
@@ -61,10 +67,10 @@ public class ManagerRegistro {
 		sala = managerSala.findSalabyId(codigoSala);
 		motivo = managerMotivo.findMotivobyID(codigoMotivo);
 		estado = managerEstado.findEstadobyId(codigoEstado);
-		
+
 		Timestamp ini = new Timestamp(inicio.getTime());
 		Timestamp end = new Timestamp(fin.getTime());
-		
+
 		registro.setRegPersona(persona);
 		registro.setAcaSala(sala);
 		registro.setRegMotivo(motivo);
@@ -79,6 +85,20 @@ public class ManagerRegistro {
 		reg_registro reg = findRegistrobyId(id);
 		if (reg != null)
 			em.remove(reg);
+	}
+
+	public void confirmarRegistro(int id, int id_estado) throws Exception {
+		reg_registro registro;
+		reg_estado est;
+		registro = managerRegistro.findRegistrobyId(id);
+		est = managerEstado.findEstadobyId(id_estado);
+		if (est == null)
+			throw new Exception("No existe este estado");
+		registro.setRegEstado(est);
+	}
+
+	public void rechazarRegistro() {
+
 	}
 //
 //	public void modificarRegistro(reg_registro registro, String cedula, int codigoSala, int codigoMotivo,

@@ -12,6 +12,7 @@ import org.primefaces.model.ScheduleModel;
 import org.primefaces.component.*;
 import org.primefaces.event.SelectEvent;
 
+import registrofica.model.entities.aca_carrera;
 import registrofica.model.entities.aca_sala;
 import registrofica.model.entities.reg_estado;
 import registrofica.model.entities.reg_motivo;
@@ -48,6 +49,8 @@ public class BeanRegistro implements Serializable {
 	private int id_sala;
 	private int id_motivo;
 	private int id_estado;
+	private int id_registro_Seleccionado;
+	private int id_estado_Seleccionado;
 	private Date inicio;
 	private Date fin;
 	private String descripcion;
@@ -130,6 +133,23 @@ public class BeanRegistro implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void actionListenerRegistroSeleccionado(reg_registro reg) {
+		registroSeleccionado = reg;
+	}
+	
+	public void confirmarSolicitud() {
+		try {
+			managerRegistro.confirmarRegistro(id_registro_Seleccionado,2);
+			listaRegistro = managerRegistro.findAllRegistro();
+			JSFUtil.crearMensajeInfo("Reservación confirmada");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 
 	public List<reg_registro> getListaRegistro() {
@@ -315,4 +335,22 @@ public class BeanRegistro implements Serializable {
     	ScheduleEvent ev = (ScheduleEvent) selectEvent.getObject();
     	event = ev;
     }
+
+	public int getId_registro_Seleccionado() {
+		return id_registro_Seleccionado;
+	}
+
+	public void setId_registro_Seleccionado(int id_registro_Seleccionado) {
+		this.id_registro_Seleccionado = id_registro_Seleccionado;
+	}
+
+	public int getId_estado_Seleccionado() {
+		return id_estado_Seleccionado;
+	}
+
+	public void setId_estado_Seleccionado(int id_estado_Seleccionado) {
+		this.id_estado_Seleccionado = id_estado_Seleccionado;
+	}
+    
+    
 }
