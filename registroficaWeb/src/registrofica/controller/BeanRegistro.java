@@ -138,9 +138,9 @@ public class BeanRegistro implements Serializable {
 		registroSeleccionado = reg;
 	}
 	
-	public void confirmarSolicitud() {
+	public void SolicitudConfirmada(int id_registro) {
 		try {
-			managerRegistro.confirmarRegistro(id_registro_Seleccionado,3);
+			managerRegistro.confirmarRegistro(id_registro, 3);
 			listaRegistro = managerRegistro.findAllRegistro();
 			JSFUtil.crearMensajeInfo("Reservación confirmada");
 		} catch (Exception e) {
@@ -149,11 +149,11 @@ public class BeanRegistro implements Serializable {
 		}
 	}
 	
-	public void rechazarSolicitud() {
+	public void rechazarSolicitud(int id_registro) {
 		try {
-			managerRegistro.confirmarRegistro(id_registro_Seleccionado,4);
+			managerRegistro.rechazarRegistro(id_registro, 4);
 			listaRegistro = managerRegistro.findAllRegistro();
-			JSFUtil.crearMensajeInfo("Reservación confirmada");
+			JSFUtil.crearMensajeInfo("Reservación rechazada");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();

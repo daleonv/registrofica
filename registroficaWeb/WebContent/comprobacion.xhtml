@@ -50,14 +50,11 @@
 						<div align="center">
 							<p:commandButton icon="fa fa-save" value="Aceptar"
 								update="@form,:form2"
-								actionListener="#{beanRegistro.confirmarSolicitud()}">
-								
+								actionListener="#{beanRegistro.SolicitudConfirmada(registro.idRegistro)}">
 							</p:commandButton>
-							<p:commandButton icon="fa fa-close" value="Rechazar"
-								update=":@form,:form2" header="Rechazar"
-								message="Rechazar solicitud">
-								<p:confirm header="Rechazar" message="Rechazar Solicitud?"
-									icon="fa fa-exclamation-triangle" ></p:confirm>
+							<p:commandButton icon="fa fa-save" value="Rechazar"
+								update="@form,:form2"
+								actionListener="#{beanRegistro.rechazarSolicitud(registro.idRegistro)}">
 							</p:commandButton>
 						</div>
 					</p:column>

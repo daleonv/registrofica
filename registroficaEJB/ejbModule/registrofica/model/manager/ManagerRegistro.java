@@ -93,7 +93,7 @@ public class ManagerRegistro {
 		registro = managerRegistro.findRegistrobyId(id);
 		est = managerEstado.findEstadobyId(id_estado);
 		if (est == null)
-			throw new Exception("No existe este estado rechazado");
+			throw new Exception("No existe este estado");
 		registro.setRegEstado(est);
 	}
 	
@@ -103,7 +103,7 @@ public class ManagerRegistro {
 		registro = managerRegistro.findRegistrobyId(id);
 		est = managerEstado.findEstadobyId(id_estado);
 		if (est == null)
-			throw new Exception("No existe este estado rechazado");
+			throw new Exception("No existe este estado");
 		registro.setRegEstado(est);
 	}
 
