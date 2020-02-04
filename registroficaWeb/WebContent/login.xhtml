@@ -39,7 +39,7 @@
 					value="#{beanPersona.persona.password}" required="true" />
 				<h:column />
 				<p:commandButton icon="ui-icon-key" value="Iniciar Sesión"
-					action="#{beanPersona.iniciarSesion()}" />
+					action="#{beanPersona.iniciarSesion()}" actionListener="#{beanRegistro.init()}"/>
 			</h:panelGrid>
 		</h:form>
 	</div>

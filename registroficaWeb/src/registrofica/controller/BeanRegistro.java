@@ -62,6 +62,7 @@ public class BeanRegistro implements Serializable {
 	@PostConstruct
 	public void init() {
 		listaRegistro = managerRegistro.findAllRegistro();
+		lista_enespera = managerRegistro.findRegistroEspera();
 		modelo = new DefaultScheduleModel();
 		modelo.clear();
 		for (reg_registro reg : listaRegistro) {
@@ -112,6 +113,7 @@ public class BeanRegistro implements Serializable {
 		try {
 			managerRegistro.insertarRegistro(cedula, id_sala, id_motivo, 1, inicio, fin, descripcion);
 			listaRegistro = managerRegistro.findAllRegistro();
+			lista_enespera = managerRegistro.findRegistroEspera();
 			modelo.clear();
 			for (reg_registro reg : listaRegistro) {
 				if (reg.getRegEstado().getIdEstado() == 1) {

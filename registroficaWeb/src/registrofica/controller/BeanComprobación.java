@@ -24,13 +24,15 @@ public class BeanComprobación implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		lista = managerRegistro.findRegistroEspera();
+		lista_Enespera = managerRegistro.findRegistroEspera();
+		lista = managerRegistro.findAllRegistro();
 	}
 
 	public void SolicitudConfirmada(int id_registro) {
 		try {
 			managerRegistro.confirmarRegistro(id_registro, 3);
-			lista = managerRegistro.findRegistroEspera();
+			lista_Enespera = managerRegistro.findRegistroEspera();
+			lista = managerRegistro.findAllRegistro();
 			JSFUtil.crearMensajeInfo("Reservación confirmada");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
@@ -41,7 +43,8 @@ public class BeanComprobación implements Serializable {
 	public void rechazarSolicitud(int id_registro) {
 		try {
 			managerRegistro.rechazarRegistro(id_registro, 4);
-			lista = managerRegistro.findRegistroEspera();
+			lista_Enespera = managerRegistro.findRegistroEspera();
+			lista = managerRegistro.findAllRegistro();
 			JSFUtil.crearMensajeInfo("Reservación rechazada");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());

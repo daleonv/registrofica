@@ -42,8 +42,8 @@
 					style="width: 400px;" action="sala.xhtml"></p:commandButton>
 			</p:panelGrid>
 			<p:panelGrid columns="1">
-				<p:commandButton value="VER REGISTROS" icon="fa fa-save"
-					style="width: 400px;" action="comprobacion.xhtml"></p:commandButton>
+				<p:commandButton value="VER REGISTROS" icon="fa fa-save" actionListener="#{beanComprobación.init()}"
+					style="width: 400px;" action="/faces/comprobacion.xhtml?faces-redirect=true"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</div>
