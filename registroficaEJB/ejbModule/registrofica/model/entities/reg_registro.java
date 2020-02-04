@@ -5,47 +5,47 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
-
 /**
  * The persistent class for the reg_registro database table.
  * 
  */
 @Entity
-@Table(name="reg_registro")
-@NamedQuery(name="reg_registro.findAll", query="SELECT r FROM reg_registro r")
+@Table(name = "reg_registro")
+@NamedQueries({ @NamedQuery(name = "reg_registro.findAll", query = "SELECT r FROM reg_registro r"),
+		@NamedQuery(name = "reg_registro.findEspera", query = "SELECT r FROM reg_registro r WHERE r.regEstado.idEstado=1") })
 public class reg_registro implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_registro", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_registro", unique = true, nullable = false)
 	private Integer idRegistro;
 
-	@Column(length=2147483647)
+	@Column(length = 2147483647)
 	private String descripcion;
 
 	private Timestamp fin;
 
 	private Timestamp inicio;
 
-	//bi-directional many-to-one association to aca_sala
+	// bi-directional many-to-one association to aca_sala
 	@ManyToOne
-	@JoinColumn(name="id_sala")
+	@JoinColumn(name = "id_sala")
 	private aca_sala acaSala;
 
-	//bi-directional many-to-one association to reg_estado
+	// bi-directional many-to-one association to reg_estado
 	@ManyToOne
-	@JoinColumn(name="id_estado")
+	@JoinColumn(name = "id_estado")
 	private reg_estado regEstado;
 
-	//bi-directional many-to-one association to reg_motivo
+	// bi-directional many-to-one association to reg_motivo
 	@ManyToOne
-	@JoinColumn(name="id_motivo")
+	@JoinColumn(name = "id_motivo")
 	private reg_motivo regMotivo;
 
-	//bi-directional many-to-one association to reg_persona
+	// bi-directional many-to-one association to reg_persona
 	@ManyToOne
-	@JoinColumn(name="cedula")
+	@JoinColumn(name = "cedula")
 	private reg_persona regPersona;
 
 	public reg_registro() {

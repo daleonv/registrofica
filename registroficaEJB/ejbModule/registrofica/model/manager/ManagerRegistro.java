@@ -7,8 +7,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import registrofica.model.entities.aca_carrera;
 import registrofica.model.entities.aca_sala;
@@ -45,6 +47,10 @@ public class ManagerRegistro {
 
 	public List<reg_registro> findAllRegistro() {
 		return em.createNamedQuery("reg_registro.findAll").getResultList();
+	}
+
+	public List<reg_registro> findRegistroEspera() {
+		return em.createNamedQuery("reg_registro.findEspera").getResultList();
 	}
 
 	public reg_registro findRegistrobyId(int id) {
@@ -96,7 +102,7 @@ public class ManagerRegistro {
 			throw new Exception("No existe este estado");
 		registro.setRegEstado(est);
 	}
-	
+
 	public void rechazarRegistro(int id, int id_estado) throws Exception {
 		reg_registro registro;
 		reg_estado est;

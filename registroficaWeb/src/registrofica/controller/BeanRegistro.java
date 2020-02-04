@@ -170,27 +170,6 @@ public class BeanRegistro implements Serializable {
 		registroSeleccionado = reg;
 	}
 
-	public void SolicitudConfirmada(int id_registro) {
-		try {
-			managerRegistro.confirmarRegistro(id_registro, 3);
-			listaRegistro = managerRegistro.findAllRegistro();
-			JSFUtil.crearMensajeInfo("Reservación confirmada");
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
-	public void rechazarSolicitud(int id_registro) {
-		try {
-			managerRegistro.rechazarRegistro(id_registro, 4);
-			listaRegistro = managerRegistro.findAllRegistro();
-			JSFUtil.crearMensajeInfo("Reservación rechazada");
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-			e.printStackTrace();
-		}
-	}
 
 	public List<reg_registro> getListaRegistro() {
 		return listaRegistro;

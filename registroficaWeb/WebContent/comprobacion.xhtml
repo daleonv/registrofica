@@ -17,7 +17,7 @@
 	<div align="center">
 		<h:form id="form2">
 			<p:panel header="Solicitudes Pendientes" style="width: 1800px;">
-				<p:dataTable value="#{beanRegistro.listaRegistro}" var="registro"
+				<p:dataTable value="#{beanComprobación.lista}" var="registro"
 					reflow="true" rows="8" paginator="true">
 					<p:column headerText="Cedula">
 						<h:outputText value="#{registro.regPersona.cedula}"></h:outputText>
@@ -50,11 +50,11 @@
 						<div align="center">
 							<p:commandButton icon="fa fa-save" value="Aceptar"
 								update="@form,:form2"
-								actionListener="#{beanRegistro.SolicitudConfirmada(registro.idRegistro)}">
+								actionListener="#{beanComprobación.SolicitudConfirmada(registro.idRegistro)}">
 							</p:commandButton>
 							<p:commandButton icon="fa fa-save" value="Rechazar"
 								update="@form,:form2"
-								actionListener="#{beanRegistro.rechazarSolicitud(registro.idRegistro)}">
+								actionListener="#{beanComprobación.rechazarSolicitud(registro.idRegistro)}">
 							</p:commandButton>
 						</div>
 					</p:column>
