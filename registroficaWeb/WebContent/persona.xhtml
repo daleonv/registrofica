@@ -37,7 +37,10 @@
 						<f:validateRegex pattern="[a-zA-Z]+" />
 					</p:inputText>
 					<h:outputText value="Correo" />
-					<p:inputText value="#{beanPersona.persona.correo}" required="true" />
+					<p:inputText value="#{beanPersona.persona.correo}" required="true"
+						validatorMessage="Correo mal ingresado (Ingrese su correo insitucional)">
+						<f:validateRegex pattern="[a-zA-Z0-9]+@utn.edu.ec" />
+					</p:inputText>
 					<h:outputText value="Celular" />
 					<p:inputText value="#{beanPersona.persona.celular}" required="true"
 						validatorMessage="Ingrese solo números en celular">
@@ -135,7 +138,9 @@
 				</p:inputText>
 				<h:outputText value="Correo" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.correo}"
-					required="true" />
+					required="true" validatorMessage="Correo mal ingresado">
+					<f:validateRegex pattern="[0-9]+" />
+				</p:inputText>
 				<h:outputText value="Celular" />
 				<p:inputText value="#{beanPersona.personaSeleccionada.celular}"
 					required="true" validatorMessage="Ingrese solo números en Celular">

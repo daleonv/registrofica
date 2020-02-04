@@ -3,6 +3,7 @@ package registrofica.controller;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import org.primefaces.model.DefaultScheduleEvent;
@@ -44,6 +45,7 @@ public class BeanRegistro implements Serializable {
 	private aca_sala salaSeleccionada;
 	private reg_motivo motivoSeleccionado;
 	private reg_estado estadoSeleccionado;
+	private List<reg_registro> lista_enespera;
 	private int id_registro;
 	private String cedula;
 	private int id_sala;
@@ -57,25 +59,39 @@ public class BeanRegistro implements Serializable {
 	private boolean panelColapsado;
 	private Date todayDate = new Date();
 
-
 	@PostConstruct
 	public void init() {
 		listaRegistro = managerRegistro.findAllRegistro();
 		modelo = new DefaultScheduleModel();
 		modelo.clear();
-		for (reg_registro reg: listaRegistro) {
-			if(reg.getRegEstado().getNombre().equals("En espera") || reg.getRegEstado().getNombre().equals("Confirmado")) {
+		for (reg_registro reg : listaRegistro) {
+			if (reg.getRegEstado().getIdEstado() == 1) {
 				String id = reg.getIdRegistro().toString();
 				String motivo = reg.getRegMotivo().getDetalle();
 				Date inicio = new Date(reg.getInicio().getTime());
 				Date fin = new Date(reg.getFin().getTime());
-				String datos = reg.getDescripcion();
+				String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
 				DefaultScheduleEvent event = new DefaultScheduleEvent();
 				event.setId(id);
 				event.setTitle(motivo);
 				event.setStartDate(inicio);
 				event.setEndDate(fin);
 				event.setDescription(datos);
+				event.setStyleClass("espera");
+				modelo.addEvent(event);
+			} else if (reg.getRegEstado().getIdEstado() == 3) {
+				String id = reg.getIdRegistro().toString();
+				String motivo = reg.getRegMotivo().getDetalle();
+				Date inicio = new Date(reg.getInicio().getTime());
+				Date fin = new Date(reg.getFin().getTime());
+				String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
+				DefaultScheduleEvent event = new DefaultScheduleEvent();
+				event.setId(id);
+				event.setTitle(motivo);
+				event.setStartDate(inicio);
+				event.setEndDate(fin);
+				event.setDescription(datos);
+				event.setStyleClass("confirmado");  
 				modelo.addEvent(event);
 			}
 		}
@@ -90,36 +106,52 @@ public class BeanRegistro implements Serializable {
 		panelColapsado = !panelColapsado;
 	}
 
-	public String actionListenerInsertarRegistro() {
+	public void actionListenerInsertarRegistro() {
+		String url = "/registroficaWeb/faces/confi.html";
+
 		try {
 			managerRegistro.insertarRegistro(cedula, id_sala, id_motivo, 1, inicio, fin, descripcion);
 			listaRegistro = managerRegistro.findAllRegistro();
 			modelo.clear();
-			for (reg_registro reg: listaRegistro) {
-				if(reg.getRegEstado().getNombre().equals("En espera") || reg.getRegEstado().getNombre().equals("Confirmado")) {
+			for (reg_registro reg : listaRegistro) {
+				if (reg.getRegEstado().getIdEstado() == 1) {
 					String id = reg.getIdRegistro().toString();
 					String motivo = reg.getRegMotivo().getDetalle();
 					Date inicio = new Date(reg.getInicio().getTime());
 					Date fin = new Date(reg.getFin().getTime());
-					String datos = reg.getDescripcion();
+					String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
 					DefaultScheduleEvent event = new DefaultScheduleEvent();
 					event.setId(id);
 					event.setTitle(motivo);
 					event.setStartDate(inicio);
 					event.setEndDate(fin);
 					event.setDescription(datos);
+					event.setStyleClass("espera");
+					modelo.addEvent(event);
+				} else if (reg.getRegEstado().getIdEstado() == 3) {
+					String id = reg.getIdRegistro().toString();
+					String motivo = reg.getRegMotivo().getDetalle();
+					Date inicio = new Date(reg.getInicio().getTime());
+					Date fin = new Date(reg.getFin().getTime());
+					String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
+					DefaultScheduleEvent event = new DefaultScheduleEvent();
+					event.setId(id);
+					event.setTitle(motivo);
+					event.setStartDate(inicio);
+					event.setEndDate(fin);
+					event.setDescription(datos);
+					event.setStyleClass("confirmado");  
 					modelo.addEvent(event);
 				}
 			}
 			registro = new reg_registro();
 			JSFUtil.crearMensajeInfo("Datos ingresados");
-			return "confirmacion";
+			FacesContext.getCurrentInstance().getExternalContext().redirect(url);
 		} catch (Exception e) {
 			e.getMessage();
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
 		}
-		return "";
 	}
 
 	public void actionListenerEliminarRegistro(int id) {
@@ -133,11 +165,11 @@ public class BeanRegistro implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void actionListenerRegistroSeleccionado(reg_registro reg) {
 		registroSeleccionado = reg;
 	}
-	
+
 	public void SolicitudConfirmada(int id_registro) {
 		try {
 			managerRegistro.confirmarRegistro(id_registro, 3);
@@ -148,7 +180,7 @@ public class BeanRegistro implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void rechazarSolicitud(int id_registro) {
 		try {
 			managerRegistro.rechazarRegistro(id_registro, 4);
@@ -159,8 +191,6 @@ public class BeanRegistro implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-
 
 	public List<reg_registro> getListaRegistro() {
 		return listaRegistro;
@@ -337,14 +367,15 @@ public class BeanRegistro implements Serializable {
 	public void setEvent(ScheduleEvent event) {
 		this.event = event;
 	}
+
 	public Date getTodayDate() {
-	    return todayDate;
+		return todayDate;
 	}
-	
-    public void onEventSelect(SelectEvent selectEvent) {
-    	ScheduleEvent ev = (ScheduleEvent) selectEvent.getObject();
-    	event = ev;
-    }
+
+	public void onEventSelect(SelectEvent selectEvent) {
+		ScheduleEvent ev = (ScheduleEvent) selectEvent.getObject();
+		event = ev;
+	}
 
 	public int getId_registro_Seleccionado() {
 		return id_registro_Seleccionado;
@@ -361,6 +392,17 @@ public class BeanRegistro implements Serializable {
 	public void setId_estado_Seleccionado(int id_estado_Seleccionado) {
 		this.id_estado_Seleccionado = id_estado_Seleccionado;
 	}
-    
-    
+
+	public List<reg_registro> getLista_enespera() {
+		return lista_enespera;
+	}
+
+	public void setLista_enespera(List<reg_registro> lista_enespera) {
+		this.lista_enespera = lista_enespera;
+	}
+
+	public void setTodayDate(Date todayDate) {
+		this.todayDate = todayDate;
+	}
+
 }

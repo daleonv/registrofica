@@ -91,7 +91,7 @@ public class BeanPersona implements Serializable {
 		try {
 			pe = managerPersona.iniciarSesion(persona);
 			if (pe != null) {
-				redireccion = "registro";
+				redireccion = "/faces/registro.xhtml?faces-redirect=true";
 				JSFUtil.crearMensajeInfo("Acceso correcto");
 			} else {
 				JSFUtil.crearMensajeError("Datas incorrectos");
