@@ -12,6 +12,8 @@
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
 		<title>Administrador</title>
 	</f:facet>
+	<h:link type="text/css" href="resources/css/agency.min.css"
+		rel="stylesheet" />
 </h:head>
 <body>
 	<p:growl>
@@ -27,20 +29,32 @@
 				<img src="resources/img/logos/utn.png" alt="" />
 			</div>
 			<br /> <br /> <br />
-
+			<h:outputStylesheet library="css" name="agency.min.css"></h:outputStylesheet>
+			<div class="ui-g-4"></div>
+			<div class="ui-g-4">
 			<h:panelGrid columns="2">
-				<p:outputLabel for="txtUsuario" value="Username" />
-				<p:inputText id="txtUsuario"
-					value="#{beanAdministrador.administrador.username}" required="true" />
-				<p:outputLabel for="txtPassword" value="Password" />
-				<p:inputText id="txtPassword" type="password"
-					value="#{beanAdministrador.administrador.password}" required="true" />
-				<h:column />
-				<p:commandButton icon="ui-icon-key" value="Iniciar Sesión"
-					action="#{beanAdministrador.iniciarSesion()}" />
-			</h:panelGrid>
+					<p:outputLabel for="txtUsuario" value="Username" />
+					<p:inputText id="txtUsuario"
+						value="#{beanAdministrador.administrador.username}"
+						required="true" />
+					<p:outputLabel for="txtPassword" value="Password" />
+					<p:inputText id="txtPassword" type="password"
+						value="#{beanAdministrador.administrador.password}"
+						required="true" />
+				</h:panelGrid>
+				<br />
+				<p:commandButton icon="pi pi-key" value="Iniciar Sesión"
+					action="#{beanAdministrador.iniciarSesion()}"
+					style="background-color: red;width: 50%;" />
+			</div>
+			<div class="ui-g-4"></div>
+			
+				
+			
 		</div>
 	</h:form>
-
+	<div class="footer">
+		<p>KodoRes UTN Copyright © 2020 All rights reserved.</p>
+	</div>
 </body>
 </html>
