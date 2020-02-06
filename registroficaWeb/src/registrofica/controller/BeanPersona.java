@@ -12,6 +12,10 @@ import registrofica.model.manager.ManagerCarrera;
 import registrofica.model.manager.ManagerPersona;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.List;
 
 @Named
@@ -40,13 +44,27 @@ public class BeanPersona implements Serializable {
 		carrera = new aca_carrera();
 		panelColapsado = true;
 	}
-	
+
 	public void actionListenerColapsarPanel() {
 		panelColapsado = !panelColapsado;
 	}
-	
+
 	public void actionListenerInsertarPersona() {
 		try {
+			// encriptado
+			String pass = persona.getPassword();
+			byte[] newPassword = null;
+			try {
+				newPassword = MessageDigest.getInstance("SHA").digest(pass.getBytes("UTF-8"));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			String encriptado= Base64.getEncoder().encodeToString(newPassword);
+			persona.setPassword(encriptado);
+			// codigo
 			managerPersona.insertarPersona(persona, id_carrera);
 			listaPersona = managerPersona.findAllPersona();
 			persona = new reg_persona();
@@ -57,7 +75,7 @@ public class BeanPersona implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void actionListenerEliminarPersona(String cedula) {
 		try {
 			managerPersona.eliminarPersona(cedula);
@@ -69,11 +87,11 @@ public class BeanPersona implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void actionListenerPersonaSeleccionado(reg_persona per) {
 		personaSeleccionada = per;
 	}
-	
+
 	public void actualizarPersona() {
 		try {
 			managerPersona.modificarPersona(personaSeleccionada, id_carrera_seleccionada);
