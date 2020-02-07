@@ -71,28 +71,26 @@ public class BeanRegistro implements Serializable {
 				String motivo = reg.getRegMotivo().getDetalle();
 				Date inicio = new Date(reg.getInicio().getTime());
 				Date fin = new Date(reg.getFin().getTime());
-				String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
+				String datos = reg.getDescripcion() + " -- " + reg.getAcaSala().getNombre();
 				DefaultScheduleEvent event = new DefaultScheduleEvent();
 				event.setId(id);
 				event.setTitle(motivo);
 				event.setStartDate(inicio);
 				event.setEndDate(fin);
 				event.setDescription(datos);
-				event.setStyleClass("espera");
 				modelo.addEvent(event);
 			} else if (reg.getRegEstado().getIdEstado() == 3) {
 				String id = reg.getIdRegistro().toString();
 				String motivo = reg.getRegMotivo().getDetalle();
 				Date inicio = new Date(reg.getInicio().getTime());
 				Date fin = new Date(reg.getFin().getTime());
-				String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
+				String datos = reg.getDescripcion() + " -- " + reg.getAcaSala().getNombre();
 				DefaultScheduleEvent event = new DefaultScheduleEvent();
 				event.setId(id);
 				event.setTitle(motivo);
 				event.setStartDate(inicio);
 				event.setEndDate(fin);
 				event.setDescription(datos);
-				event.setStyleClass("confirmado");  
 				modelo.addEvent(event);
 			}
 		}
@@ -111,44 +109,17 @@ public class BeanRegistro implements Serializable {
 		String url = "/registroficaWeb/faces/confi.html";
 
 		try {
-			managerRegistro.insertarRegistro(cedula, id_sala, id_motivo, 1, inicio, fin, descripcion);
-			listaRegistro = managerRegistro.findAllRegistro();
-			lista_enespera = managerRegistro.findRegistroEspera();
-			modelo.clear();
-			for (reg_registro reg : listaRegistro) {
-				if (reg.getRegEstado().getIdEstado() == 1) {
-					String id = reg.getIdRegistro().toString();
-					String motivo = reg.getRegMotivo().getDetalle();
-					Date inicio = new Date(reg.getInicio().getTime());
-					Date fin = new Date(reg.getFin().getTime());
-					String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
-					DefaultScheduleEvent event = new DefaultScheduleEvent();
-					event.setId(id);
-					event.setTitle(motivo);
-					event.setStartDate(inicio);
-					event.setEndDate(fin);
-					event.setDescription(datos);
-					event.setStyleClass("registro_class");
-					modelo.addEvent(event);
-				} else if (reg.getRegEstado().getIdEstado() == 3) {
-					String id = reg.getIdRegistro().toString();
-					String motivo = reg.getRegMotivo().getDetalle();
-					Date inicio = new Date(reg.getInicio().getTime());
-					Date fin = new Date(reg.getFin().getTime());
-					String datos = reg.getDescripcion()+" -- "+reg.getAcaSala().getNombre();
-					DefaultScheduleEvent event = new DefaultScheduleEvent();
-					event.setId(id);
-					event.setTitle(motivo);
-					event.setStartDate(inicio);
-					event.setEndDate(fin);
-					event.setDescription(datos);
-					event.setStyleClass("confirmado");  
-					modelo.addEvent(event);
-				}
+			if (inicio.before(fin)) {
+				managerRegistro.insertarRegistro(cedula, id_sala, id_motivo, 1, inicio, fin, descripcion);
+				listaRegistro = managerRegistro.findAllRegistro();
+				lista_enespera = managerRegistro.findRegistroEspera();
+				registro = new reg_registro();
+				JSFUtil.crearMensajeInfo("Datos ingresados");
+				FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+			} else {
+				JSFUtil.crearMensajeError("Fechas ingresadas incongruentes");
 			}
-			registro = new reg_registro();
-			JSFUtil.crearMensajeInfo("Datos ingresados");
-			FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+
 		} catch (Exception e) {
 			e.getMessage();
 			JSFUtil.crearMensajeError(e.getMessage());
@@ -171,7 +142,6 @@ public class BeanRegistro implements Serializable {
 	public void actionListenerRegistroSeleccionado(reg_registro reg) {
 		registroSeleccionado = reg;
 	}
-
 
 	public List<reg_registro> getListaRegistro() {
 		return listaRegistro;
