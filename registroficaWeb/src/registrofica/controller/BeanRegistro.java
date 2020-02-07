@@ -128,7 +128,7 @@ public class BeanRegistro implements Serializable {
 					event.setStartDate(inicio);
 					event.setEndDate(fin);
 					event.setDescription(datos);
-					event.setStyleClass("espera");
+					event.setStyleClass("registro_class");
 					modelo.addEvent(event);
 				} else if (reg.getRegEstado().getIdEstado() == 3) {
 					String id = reg.getIdRegistro().toString();

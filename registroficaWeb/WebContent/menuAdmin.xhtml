@@ -13,9 +13,12 @@
 	</f:facet>
 </h:head>
 <body>
-
+	<h:outputStylesheet library="css" name="agency.min.css"></h:outputStylesheet>
+	<div class="headerPRO">
+		<p>MENÚ ADMINISTRADOR</p>
+	</div>
 	<div align="center">
-	<h1>MENÚ ADMINISTRADOR</h1>
+		<h1></h1>
 		<h:form>
 			<p:panelGrid columns="1">
 				<p:commandButton value="Registrar Motivo" icon="fa fa-save"
@@ -42,8 +45,9 @@
 					style="width: 400px;" action="sala.xhtml"></p:commandButton>
 			</p:panelGrid>
 			<p:panelGrid columns="1">
-				<p:commandButton value="VER REGISTROS" icon="fa fa-save" actionListener="#{beanComprobación.init()}"
-					style="width: 400px;" action="/faces/comprobacion.xhtml?faces-redirect=true"></p:commandButton>
+				<p:commandButton value="VER REGISTROS" icon="fa fa-save"
+					actionListener="#{beanComprobación.init()}" style="width: 400px;"
+					action="/faces/comprobacion.xhtml?faces-redirect=true"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
 	</div>

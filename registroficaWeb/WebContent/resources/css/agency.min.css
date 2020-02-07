@@ -681,6 +681,11 @@ section#contact :-ms-input-placeholder {
 	text-align: center
 }
 
+.headerPRO {
+	padding: 20px 0;
+	text-align: center
+}
+
 .footer span.copyright {
 	font-size: 90%;
 	line-height: 40px;
@@ -721,21 +726,35 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 	{
 	background-color: #fed136
 }
+
 .footer {
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
-}
-.boton_prime{
 	position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background-color: red;
-   color: white;
-   text-align: center;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
 }
+
+.headerPRO {
+	font-size: 25px;
+	left: 0;
+	bottom: 0;
+	height: 50%;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+
+.boton_prime {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	color: white;
+	text-align: center;
+}
+.
