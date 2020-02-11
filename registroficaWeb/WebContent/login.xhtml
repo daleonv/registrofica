@@ -13,7 +13,8 @@
 		<title>Iniciar Sesión</title>
 
 	</f:facet>
-	<h:link type="text/css" href="resources/css/agency.min.css" rel="stylesheet"/>
+	<h:link type="text/css" href="resources/css/agency.min.css"
+		rel="stylesheet" />
 </h:head>
 <body>
 	<p:growl>
@@ -34,7 +35,7 @@
 	<h:form>
 		<div class="ui-g">
 
-			<div class="ui-g-2"></div>
+			<div class="ui-g-4"></div>
 			<div class="ui-g-4">
 				<div align="center">
 					<p:panelGrid columns="2" layout="grid">
@@ -53,29 +54,26 @@
 						<p:outputLabel for="txtPassword" value="Contraseña"
 							style="font-size:20px" />
 						<p:inputText type="password" id="txtPassword"
-							value="#{beanPersona.persona.password}" required="true" />
+							value="#{beanPersona.persona.password}" required="true"
+							title="Para ingresar al sistema use su cédula como contraseña" />
+						<p:tooltip for="txtPassword"></p:tooltip>
 					</p:panelGrid>
 				</div>
 				<br />
 				<div align="center">
 					<p:commandButton icon="pi pi-key" value="Iniciar Sesión"
 						action="#{beanPersona.iniciarSesion()}"
-						actionListener="#{beanRegistro.init()}" style="background-color: red;width: 50%;"/>
+						actionListener="#{beanRegistro.init()}"
+						style="background-color: red;width: 50%;" />
 				</div>
 
 			</div>
-			<div class="ui-g-1"></div>
-			<div class="ui-g-3">
-				<h1
-					style="font-family: georgia, garamond, serif; font-size: 35px; font-style: georgia;">
-					PARA INGRESAR AL SISTEMA USE SU CÉDULA COMO CONTRASEÑA</h1>
-			</div>
+
 		</div>
 	</h:form>
 
 	<div class="footer">
-		<p>KodoRes UTN Copyright © 2020 All
-			rights reserved.</p>
+		<p>KodoRes UTN Copyright © 2020 All rights reserved.</p>
 	</div>
 </body>
 </html>

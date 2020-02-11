@@ -19,6 +19,7 @@
 			<p:growl>
 				<p:autoUpdate />
 			</p:growl>
+			<br /> <br />
 			<h:outputStylesheet library="css" name="agency.min.css"></h:outputStylesheet>
 			<h:form id="form1">
 				<p:autoUpdate />
@@ -26,8 +27,8 @@
 					<p:panelGrid columns="2"
 						columnClasses="ui-g-12 ui-md-4,ui-g-12 ui-md-8" layout="grid"
 						styleClass="ui-panelgrid-blank ui-fluid">
-						<h:outputText value="Cedula"/>
-						<p:selectOneMenu id="cedula" value="#{beanRegistro.cedula}" >
+						<h:outputText value="Cedula" />
+						<p:selectOneMenu id="cedula" value="#{beanRegistro.cedula}">
 							<f:selectItems value="#{beanPersona.listaPersona}" var="ced"
 								itemLabel="#{ced.cedula}" itemValue="#{ced.cedula}" />
 						</p:selectOneMenu>
@@ -46,7 +47,8 @@
 
 						<h:outputText value="Fecha de inicio" />
 						<p:calendar value="#{beanRegistro.inicio}"
-							pattern="yyyy-MM-dd HH:mm" mindate="#{beanRegistro.todayDate}" locale="es"></p:calendar>
+							pattern="yyyy-MM-dd HH:mm" mindate="#{beanRegistro.todayDate}"
+							locale="es"></p:calendar>
 						<h:outputText value="Fecha de finalización" />
 						<p:calendar value="#{beanRegistro.fin}" pattern="yyyy-MM-dd HH:mm"
 							mindate="#{beanRegistro.todayDate}" locale="es"></p:calendar>
@@ -69,8 +71,14 @@
 				<p:commandButton value="SI" type="button"
 					styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
 				<p:commandButton value="NO" type="button"
-					styleClass="ui-confirmdialog-no" icon="fa fa-check"></p:commandButton>
+					styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
 			</p:confirmDialog>
+			<br /> <br />
+			<h:graphicImage value="/resources/img/logos/logoUTN.png" />
+			<div align="center">
+			<p:commandButton value="Regresar" icon="fa fa-undo"
+				action="/faces/index.html?faces-redirect=true"></p:commandButton>
+				</div>
 		</div>
 		<div class="ui-g-12 ui-md-6 ui-lg-8">
 
