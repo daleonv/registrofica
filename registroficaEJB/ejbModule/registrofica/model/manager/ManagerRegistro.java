@@ -63,28 +63,29 @@ public class ManagerRegistro {
 
 	public void insertarRegistro(String cedula, int codigoSala, int codigoMotivo, int codigoEstado, Date inicio,
 			Date fin, String descripcion) throws Exception {
-			reg_registro registro = new reg_registro();
-			reg_persona persona;
-			aca_sala sala;
-			reg_motivo motivo;
-			reg_estado estado;
 
-			persona = managerPersona.findPersonabyId(cedula);
-			sala = managerSala.findSalabyId(codigoSala);
-			motivo = managerMotivo.findMotivobyID(codigoMotivo);
-			estado = managerEstado.findEstadobyId(codigoEstado);
+		reg_registro registro = new reg_registro();
+		reg_persona persona;
+		aca_sala sala;
+		reg_motivo motivo;
+		reg_estado estado;
 
-			Timestamp ini = new Timestamp(inicio.getTime());
-			Timestamp end = new Timestamp(fin.getTime());
+		persona = managerPersona.findPersonabyId(cedula);
+		sala = managerSala.findSalabyId(codigoSala);
+		motivo = managerMotivo.findMotivobyID(codigoMotivo);
+		estado = managerEstado.findEstadobyId(codigoEstado);
 
-			registro.setRegPersona(persona);
-			registro.setAcaSala(sala);
-			registro.setRegMotivo(motivo);
-			registro.setRegEstado(estado);
-			registro.setInicio(ini);
-			registro.setFin(end);
-			registro.setDescripcion(descripcion);
-			em.persist(registro);
+		Timestamp ini = new Timestamp(inicio.getTime());
+		Timestamp end = new Timestamp(fin.getTime());
+
+		registro.setRegPersona(persona);
+		registro.setAcaSala(sala);
+		registro.setRegMotivo(motivo);
+		registro.setRegEstado(estado);
+		registro.setInicio(ini);
+		registro.setFin(end);
+		registro.setDescripcion(descripcion);
+		em.persist(registro);
 
 	}
 
