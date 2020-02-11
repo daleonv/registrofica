@@ -46,10 +46,10 @@
 
 						<h:outputText value="Fecha de inicio" />
 						<p:calendar value="#{beanRegistro.inicio}"
-							pattern="yyyy-MM-dd HH:mm" mindate="#{beanRegistro.todayDate}"></p:calendar>
+							pattern="yyyy-MM-dd HH:mm" mindate="#{beanRegistro.todayDate}" locale="es"></p:calendar>
 						<h:outputText value="Fecha de finalización" />
 						<p:calendar value="#{beanRegistro.fin}" pattern="yyyy-MM-dd HH:mm"
-							mindate="#{beanRegistro.todayDate}"></p:calendar>
+							mindate="#{beanRegistro.todayDate}" locale="es"></p:calendar>
 						<h:outputText value="Descripción" />
 						<p:inputTextarea value="#{beanRegistro.descripcion}"></p:inputTextarea>
 
@@ -127,12 +127,12 @@
 
 						<p:outputLabel for="from" value="Fecha de Inicio:" />
 						<p:datePicker id="from" value="#{beanRegistro.event.startDate}"
-							pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)"
+							pattern="dd/MM/yyyy HH:mm" showTime="true" appendTo="@(body)"
 							readonly="true" />
 
 						<p:outputLabel for="to" value="Fecha de Finalización:" />
 						<p:datePicker id="to" value="#{beanRegistro.event.endDate}"
-							pattern="dd/MM/yyyy" showTime="true" appendTo="@(body)"
+							pattern="dd/MM/yyyy HH:mm" showTime="true" appendTo="@(body)"
 							readonly="true" />
 
 					</h:panelGrid>
